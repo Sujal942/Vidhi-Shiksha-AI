@@ -36,9 +36,9 @@ const QueryPage = () => {
       // Construct the full legal query
       const fullQuery = `Explain the legal implications of ${query} under Indian Law, including sections from the IPC and other relevant laws.`;
 
-      // Make a request to Gemini API for Indian law research
+      // Make a request to Vidhi Shiksha AI API for Indian law research
       const geminiResponse = await axios.post(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDFGqX_0CdXn9p0-KzL87YbP6NW8GpUh8U",
+        // "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDFGqX_0CdXn9p0-KzL87YbP6NW8GpUh8U",
         {
           contents: [
             {
@@ -57,10 +57,10 @@ const QueryPage = () => {
         }
       );
 
-      console.log("Gemini API Full Response:", geminiResponse);
+      console.log("Vidhi Shiksha AI API Full Response:", geminiResponse);
 
       if (geminiResponse?.data) {
-        console.log("Gemini Data:", geminiResponse.data);
+        console.log("Vidhi Shiksha AI Data:", geminiResponse.data);
 
         const candidates = geminiResponse.data?.candidates;
         console.log("Candidates:", candidates);

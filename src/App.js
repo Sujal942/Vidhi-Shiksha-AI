@@ -8,11 +8,10 @@ import UploadDocument from "./components/UploadDocument";
 import AccessDocuments from "./components/AccessDocuments";
 import FindLawyers from "./components/FindLawyers";
 import OtherPages from "./components/OtherPages";
-import DocumentAnalyzer from "./components/DocumentAnalyzer";
-import LiveHearing from "./components/LiveHearing";
-import Section from "./components/Section";
 import NotesApp from "./components/NotesApp";
+import LiveHearing from "./components/LiveHearing";
 import Constitution from "./components/Constitution";
+// import DocumentAnalyzer from "./components/DocumentAnalyzer";
 
 import "./App.css";
 
@@ -77,22 +76,14 @@ const App = () => {
               </div>
             }
           />
-          <Route
-            path="/sections"
-            element={
-              <div onMouseEnter={textEnter} onMouseLeave={textLeave}>
-                <Section />
-              </div>
-            }
-          />
-          <Route
+          {/* <Route
             path="/documnet-analyzer"
             element={
               <div onMouseEnter={textEnter} onMouseLeave={textLeave}>
                 <DocumentAnalyzer />
               </div>
             }
-          />
+          /> */}
           <Route
             path="/constitution"
             element={

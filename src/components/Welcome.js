@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import model5 from "../model5.png";
-
+import ai from "../ai.png";
 const Welcome = () => {
   const [isTextVisible, setIsTextVisible] = useState(false);
   const [isTextVisible2, setIsTextVisible2] = useState(false);
@@ -99,7 +98,7 @@ const Welcome = () => {
         <div className="w-full lg:w-1/2 flex justify-center mt-8 lg:mt-0">
           <img
             className="w-full sm:w-[90%] md:w-[80%] lg:w-[700px] xl:w-[900px] h-auto transition-transform duration-500 ease-in-out ml-10 dark:opacity-90 hover:scale-105 "
-            src={model5}
+            src={ai}
             alt="AI Lawyer illustration"
           />
         </div>

@@ -5,15 +5,17 @@ const path = require("path");
 
 const uploadPdf = async (req, res) => {
   try {
+    if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+
     const uniqueId = uuidv4();
     const password = uuidv4().slice(0, 8);
     const hashedPassword = await bcrypt.hash(password, 10);
-    const pdfPath = path.join(req.file.destination, req.file.filename);
+    const pdfPath = path.resolve(req.file.destination, req.file.filename);
 
     const pdf = new Pdf({ uniqueId, password: hashedPassword, pdfPath });
     await pdf.save();
 
-    res.json({ uniqueId, password });
+    res.status(201).json({ uniqueId, password });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -29,7 +31,9 @@ const accessPdf = async (req, res) => {
     const isMatch = await bcrypt.compare(password, pdf.password);
     if (!isMatch) return res.status(401).json({ message: "Invalid password" });
 
-    res.sendFile(path.resolve(pdf.pdfPath));
+    res.sendFile(pdf.pdfPath, (err) => {
+      if (err) res.status(500).json({ message: err.message });
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

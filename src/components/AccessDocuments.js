@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./AccessDocuments.css"; // Assuming you have a CSS file for styling
+import "./AccessDocuments.css"; // Styling file
 
 const AccessDocuments = () => {
   const [uniqueId, setUniqueId] = useState("");
@@ -8,15 +8,22 @@ const AccessDocuments = () => {
   const [pdfUrl, setPdfUrl] = useState("");
 
   const handleAccess = async () => {
-    const { data } = await axios.post(
-      "http://localhost:8000/api/pdf/access",
-      { uniqueId, password },
-      { responseType: "blob" }
-    );
+    try {
+      const API_BASE_URL =
+        process.env.REACT_APP_API_URL || "http://localhost:8000";
+      const { data } = await axios.post(
+        `${API_BASE_URL}/api/pdf/access`,
+        { uniqueId, password },
+        { responseType: "blob" }
+      );
 
-    const pdfBlob = new Blob([data], { type: "application/pdf" });
-    const pdfUrl = URL.createObjectURL(pdfBlob);
-    setPdfUrl(pdfUrl);
+      const pdfBlob = new Blob([data], { type: "application/pdf" });
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      setPdfUrl(pdfUrl);
+    } catch (error) {
+      console.error("Access failed:", error.response?.data || error.message);
+      alert("Failed to access document. Please check your credentials.");
+    }
   };
 
   return (

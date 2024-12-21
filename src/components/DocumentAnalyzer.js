@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import * as pdfjs from "pdfjs-dist";
-import * as pdfjsWorker from "pdfjs-dist/legacy/build/pdf.worker.entry";
-// Set the worker source for PDF.js
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+
+// Set PDF.js worker source to a CDN to avoid "fake worker" warning
+pdfjs.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js";
 
 const DocumentAnalyzer = () => {
   const [file, setFile] = useState(null);
@@ -11,7 +12,6 @@ const DocumentAnalyzer = () => {
   const [analysisResult, setAnalysisResult] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Handle file upload
   const onDrop = (acceptedFiles) => {
     setFile(acceptedFiles[0]);
     extractTextFromPdf(acceptedFiles[0]);
@@ -19,7 +19,6 @@ const DocumentAnalyzer = () => {
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-  // Extract text from PDF
   const extractTextFromPdf = async (file) => {
     const pdf = await pdfjs.getDocument(URL.createObjectURL(file)).promise;
     let extractedText = "";
@@ -31,18 +30,21 @@ const DocumentAnalyzer = () => {
     setExtractedText(extractedText);
   };
 
-  // Analyze text using Gemini API
   const analyzeDocument = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://gemini.api.endpoint.com/analyze", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer AIzaSyDFGqX_0CdXn9p0-KzL87YbP6NW8GpUh8U`, // Replace with your Gemini API key if required
-        },
-        body: JSON.stringify({ documentText: extractedText }),
-      });
+      // Replace with your actual Gemini API URL
+      const response = await fetch(
+        "https://your-gemini-api-endpoint.com/analyze",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `AIzaSyDFGqX_0CdXn9p0-KzL87YbP6NW8GpUh8U`, // Replace with your valid Gemini API key
+          },
+          body: JSON.stringify({ documentText: extractedText }),
+        }
+      );
 
       const data = await response.json();
       setAnalysisResult(data.result || "No analysis result available.");
@@ -59,7 +61,7 @@ const DocumentAnalyzer = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto bg-white shadow-md rounded-lg">
       <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
-        Document Analyzer Vidhi Shiksha AI
+        Document Analyzer
       </h1>
 
       {/* File Upload Section */}

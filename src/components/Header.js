@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../components/Header.css";
-// import logo from "../logo.png";
+import logo from "../logo.png";
 
 const Header = () => {
   useEffect(() => {
@@ -88,12 +88,12 @@ const Header = () => {
     <header className="bg-slate-800 p-5 flex flex-wrap justify-between items-center gap-2 md:gap-6 lg:gap-8">
       {/* Logo */}
       <div className="w-full sm:w-auto flex justify-center sm:justify-start">
-        {/* <img
-          className="w-32 md:w-44 object-contain"
+        <img
+          className="w-24 md:w-32 object-contain"
           src={logo}
           alt="Company Logo"
-        /> */}
-        <h1 className="text-3xl text-white">Logo</h1>
+        />
+        {/* <h1 className="text-3xl text-white">Logo</h1> */}
       </div>
 
       {/* Navigation Links */}
@@ -131,7 +131,7 @@ const Header = () => {
           <option value="">Documents Sharing</option>
           <option value="/upload-documents">Upload Documents</option>
           <option value="/access-documents">Access Documents</option>
-          <option value="/documnet-analyzer">Document Analysis</option>
+          {/* <option value="/documnet-analyzer">Document Analysis</option> */}
         </select>
         <select
           className="bg-slate-900 rounded-lg text-white font-bold px-3 py-2 text-sm sm:text-base"
