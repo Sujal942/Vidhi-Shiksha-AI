@@ -11,8 +11,11 @@ const AccessDocuments = () => {
     try {
       const API_BASE_URL =
         process.env.REACT_APP_API_URL || "http://localhost:8000";
+      // process.env.REACT_APP_API_URL ||
+      // "https://vidhi-shiksha-ai-backend.onrender.com/";
       const { data } = await axios.post(
         `${API_BASE_URL}/api/pdf/access`,
+        // `${API_BASE_URL}pdf/access`,
         { uniqueId, password },
         { responseType: "blob" }
       );

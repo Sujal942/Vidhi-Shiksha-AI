@@ -38,7 +38,7 @@ const QueryPage = () => {
 
       // Make a request to Vidhi Shiksha AI API for Indian law research
       const geminiResponse = await axios.post(
-        // "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDFGqX_0CdXn9p0-KzL87YbP6NW8GpUh8U",
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDFGqX_0CdXn9p0-KzL87YbP6NW8GpUh8U",
         {
           contents: [
             {
