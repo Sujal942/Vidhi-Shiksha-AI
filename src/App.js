@@ -11,7 +11,7 @@ import OtherPages from "./components/OtherPages";
 import NotesApp from "./components/NotesApp";
 import LiveHearing from "./components/LiveHearing";
 import Constitution from "./components/Constitution";
-// import DocumentAnalyzer from "./components/DocumentAnalyzer";
+import DocumentAnalyzer from "./components/DocumentAnalyzer";
 
 import "./App.css";
 
@@ -76,14 +76,14 @@ const App = () => {
               </div>
             }
           />
-          {/* <Route
+          <Route
             path="/documnet-analyzer"
             element={
               <div onMouseEnter={textEnter} onMouseLeave={textLeave}>
                 <DocumentAnalyzer />
               </div>
             }
-          /> */}
+          />
           <Route
             path="/constitution"
             element={
